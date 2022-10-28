@@ -28,6 +28,100 @@ _The intended class_prompt for these is the folder name._
 FAQ:
 
 -faq under development
+How long did it take with Shivams repo?
+- 9k steps was ~2h
+
+How many attempts do you get? Or is your first dreambooth always successful?
+- Not always, but after training about 20+ models now I have a good feeling of what I'm doing. This was the first try, but other models needed refinement or more runs.
+
+How many training steps and repeat? 100 repeats so 10,400 (or 10,504) steps? 
+- EDIT I can see you say 9,000 steps, so did you change manually repeat to 86 or you did not care about that?
+- The repo Im using doesnt have the set repeats amount. So I try to set it to roughly 100*samples but the model I trained on 12k steps didn't show a big difference to the one on 8k steps.
+
+What about regularization images? How many? Based on a specific prompt ("illustration style"?) or downloaded?
+- the class images of "illustration style" were created with the same model and DDIM sampler
+
+Which base ckpt did you use? sd-v1-4.ckpt?
+- This is based on SD 1.5
+
+What token/class? From the example you gave "modern disney lara croft", you did not add the "style" word, why is that? Is "modern" the token and "disney" the class?
+- unique or desired token to train + class to train
+Arcane + Style / Zelda + Person
+
+what's the suggested way to run this?
+- Automatic
+- You would need a SD software or repo/colab that can load custom models in the ckpt format. Usually they have a models folder where you put it in and select it with the Ui There are a ton of tutorials on YouTube if you're a visual learner and need a guide.
+
+You only need the ckpt file for this?
+- Needs a repo or software to run and the ckpt dile or diffusers
+
+I've been searching for models to use lately and all Ifind are missing the .ckpt file. Is there a reason for this or did they just forget?
+- Some models come in the diffusers format. They would need to be converted to the ckpt format in order to use them with automatic
+
+what sampler, steps and cfg is best to use?
+- it should work with any sampler.
+Here are the settings for the Lara Croft image:
+modern disney lara croft
+Steps: 50, Sampler: Euler a, CFG scale: 7, Size: 512x768
+
+Do you have a video guide for dreambooth?
+- I think this guide is closest to what I'm doing over here:
+https://www.youtube.com/watch?v=tgRiZzwSdXg
+
+How do I add this to AUTOMATIC1111 on Google colab at the same time with v1. 5?
+I would like to have both. Or is it not possible?
+- Upload the model to your google drive and mount it with the colab notebook. Then you should be able to copy it into the models folder of the repo.
+There might be an easier way as well.
+
+Would you mind sharing what's your PC setup ?
+- Here you go: RTX 3090, Ryzen 9, 32GB RAM and a normal HDD
+
+But I'm more interested in how you trained SD and how the artworks in the examples have perfect faces and no extra limbs
+- That's a side effect of fine tuning a model. While feeding it images with good poses and composition it refines these characteristics as well.
+
+What kind of results would i get if i run dreambooth training on that ?
+- It might overwrite the trained data from the samples images with your new ones. I never actually tried it though.
+
+Reckon i can checkpoint merge this one with one that's trained with my face? And get myself as Disney person?
+- We had mixed reports on that but a few successfully did their faces with img2img. I don't know about merging though
+
+Does Shivram retrain the encoder as well or is the encoder frozen with his training script?
+- it trains the text encoder as well if you use the flag for that
+
+I'd love to see the connection of selected images. Curious what's a good mix of training data when training styles.
+- I usually try to go for mostly characters with different backgrounds and lighting and maybe 10% scenes and landscape shots.
+
+is there a youtube guide for dreambooth locally?
+- I just followed the instructions on this repo:
+https://github.com/ShivamShrirao/diffusers/tree/main/examples/dreambooth
+by looking through the colab you can see how it should work.
+A little coding might be needed for all of this though. Running it locally isn't as easy as using the google colab.
+
+What does your dataset look like?
+- I didnt change much for v3, just some more characters and scenes and I switched some of the more blurry shots with more clear ones.
+Also did an upscale of all the images before resizing them to 512 for more clarity.
+other than that, I try to include closeups and half body shots of a few main characters. I never use full body shots as they loose too much resolution and SD can actually make pretty good full body poses without them.
+
+Any idea if the amount of images depends if you either want to train a e.g. face vs. a style? Because for faces a lot people suggest only a few images.
+- Any idea if the amount of images depends if you either want to train a e.g. face vs. a style? Because for faces a lot people suggest only a few images.
+
+How much vram do you need for dreambooth
+- I think minimum is 10GB right now, but there might be repos down to 8GB already
+
+is there a way to combine this model with one we train ourselves (ie trained on me)
+- I haven't tried it myself but it is possible to merge the models, but from other users testing it seems that the model might loose some of its power. Here is a YouTube video regarding that: https://youtube.com/watch?v=dfMLrytpfAU According to this, training the model together with the images of you would be the best way.
+
+This is more of a general question not specific to this model: Is there an easy way to take an existing image and apply this style so that the subjects still resemble original?
+- it's either using i2i and adjust the denoising settings and prompt until it gives good results or train a model on the arcane style dataset and the person's picture
+
+For regularization images, can't we just use images of the same style? Like if we're training style of a particular show, we can upload 1000 screenshots from the show instead of generating 1000 'style of' images.
+- The reg images are supposed to be telling the model what it already knows of that class (for example a style) and prevent it from training any other classes. For example when training the class "man" you don't want the class "woman" to be affected as well. So by adding external images from any other source just prevents this "prior preservation" and trains the whole model on your sample images. If you want to achieve this effect easier you can just train without the "prior_preservation_loss" option and have the same effect.
+
+Do training images need to be 512 by 512 pixels?
+- Since the SD was trained on 512x512 I assumed that it works best to use the same resolution. But I have heard of people training with other resolutions and aspect ratios, but I don't how well it works. Some repos crop it to 512x512 automatically as well.
+
+Have you tried it on img2img and does it generate good results?
+- I haven't tried this one yet with i2i, but the arcane model had good results so I assume this would be even better, since it sticks to the style way better.
 -->
 
 *Guide by Nitrosocke, edited by wavymulder - last updated Oct 28 2022*
