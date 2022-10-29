@@ -88,7 +88,7 @@ Can I merge your model with a model trained on my face to make myself in that st
 Does Shivram retrain the encoder as well or is the encoder frozen with his training script?
 - it trains the text encoder as well if you use the flag for that
 
-What sort of iamges do you use for your dataset when training a style?
+What sort of images do you use for your dataset when training a style?
 - I usually try to go for mostly characters with different backgrounds and lighting and maybe 10% scenes and landscape shots.
 
 Is there a youtube guide for dreambooth locally?
