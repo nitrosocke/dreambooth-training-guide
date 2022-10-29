@@ -25,42 +25,42 @@ _The intended class_prompt for these is the folder name._
 
 
 <!---
-FAQ:
+## FAQ:
 
 -faq under development
-How long did it take with Shivams repo?
+
+How long does Dreambooth Training take for you with Shivam's repo?
 - 9k steps was ~2h
 
-How many attempts do you get? Or is your first dreambooth always successful?
-- Not always, but after training about 20+ models now I have a good feeling of what I'm doing. This was the first try, but other models needed refinement or more runs.
+Do your models take you a lot of attempts? Or is your first dreambooth always successful?
+- Not always, but after training about 20+ models now I have a good feeling of what I'm doing. This [the di-mo model] was the first try, but other models needed refinement or more runs.
 
-How many training steps and repeat? 100 repeats so 10,400 (or 10,504) steps? 
-- EDIT I can see you say 9,000 steps, so did you change manually repeat to 86 or you did not care about that?
+What settings do you use for training steps and repeats?
 - The repo Im using doesnt have the set repeats amount. So I try to set it to roughly 100*samples but the model I trained on 12k steps didn't show a big difference to the one on 8k steps.
 
 What about regularization images? How many? Based on a specific prompt ("illustration style"?) or downloaded?
 - the class images of "illustration style" were created with the same model and DDIM sampler
 
-Which base ckpt did you use? sd-v1-4.ckpt?
+Which base ckpt did you use for the mo-di model?
 - This is based on SD 1.5
 
 What token/class? From the example you gave "modern disney lara croft", you did not add the "style" word, why is that? Is "modern" the token and "disney" the class?
 - unique or desired token to train + class to train
 Arcane + Style / Zelda + Person
 
-what's the suggested way to run this?
-- Automatic
+How do I run your models?
+- Automatic's Repo
 - You would need a SD software or repo/colab that can load custom models in the ckpt format. Usually they have a models folder where you put it in and select it with the Ui There are a ton of tutorials on YouTube if you're a visual learner and need a guide.
 
 You only need the ckpt file for this?
 - Needs a repo or software to run and the ckpt dile or diffusers
 
-I've been searching for models to use lately and all Ifind are missing the .ckpt file. Is there a reason for this or did they just forget?
+I've been searching for models to use lately and all I find are missing the .ckpt file. Is there a reason for this or did they just forget?
 - Some models come in the diffusers format. They would need to be converted to the ckpt format in order to use them with automatic
 
-what sampler, steps and cfg is best to use?
+What sampler, steps and cfg is best to use?
 - it should work with any sampler.
-Here are the settings for the Lara Croft image:
+Here are the settings for the Lara Croft [mo-di model] image:
 modern disney lara croft
 Steps: 50, Sampler: Euler a, CFG scale: 7, Size: 512x768
 
@@ -82,16 +82,16 @@ But I'm more interested in how you trained SD and how the artworks in the exampl
 What kind of results would i get if i run dreambooth training on that ?
 - It might overwrite the trained data from the samples images with your new ones. I never actually tried it though.
 
-Reckon i can checkpoint merge this one with one that's trained with my face? And get myself as Disney person?
+Can I merge your model with a model trained on my face to make myself in that style?
 - We had mixed reports on that but a few successfully did their faces with img2img. I don't know about merging though
 
 Does Shivram retrain the encoder as well or is the encoder frozen with his training script?
 - it trains the text encoder as well if you use the flag for that
 
-I'd love to see the connection of selected images. Curious what's a good mix of training data when training styles.
+What sort of iamges do you use for your dataset when training a style?
 - I usually try to go for mostly characters with different backgrounds and lighting and maybe 10% scenes and landscape shots.
 
-is there a youtube guide for dreambooth locally?
+Is there a youtube guide for dreambooth locally?
 - I just followed the instructions on this repo:
 https://github.com/ShivamShrirao/diffusers/tree/main/examples/dreambooth
 by looking through the colab you can see how it should work.
@@ -102,16 +102,10 @@ What does your dataset look like?
 Also did an upscale of all the images before resizing them to 512 for more clarity.
 other than that, I try to include closeups and half body shots of a few main characters. I never use full body shots as they loose too much resolution and SD can actually make pretty good full body poses without them.
 
-Any idea if the amount of images depends if you either want to train a e.g. face vs. a style? Because for faces a lot people suggest only a few images.
-- Any idea if the amount of images depends if you either want to train a e.g. face vs. a style? Because for faces a lot people suggest only a few images.
-
 How much vram do you need for dreambooth
 - I think minimum is 10GB right now, but there might be repos down to 8GB already
 
-is there a way to combine this model with one we train ourselves (ie trained on me)
-- I haven't tried it myself but it is possible to merge the models, but from other users testing it seems that the model might loose some of its power. Here is a YouTube video regarding that: https://youtube.com/watch?v=dfMLrytpfAU According to this, training the model together with the images of you would be the best way.
-
-This is more of a general question not specific to this model: Is there an easy way to take an existing image and apply this style so that the subjects still resemble original?
+Is there an easy way to take an existing image and apply this style so that the subjects still resemble original?
 - it's either using i2i and adjust the denoising settings and prompt until it gives good results or train a model on the arcane style dataset and the person's picture
 
 For regularization images, can't we just use images of the same style? Like if we're training style of a particular show, we can upload 1000 screenshots from the show instead of generating 1000 'style of' images.
