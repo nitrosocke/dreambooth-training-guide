@@ -24,10 +24,13 @@ I usually use 1000 regularization images for my style training consisting of aro
 _The intended class_prompt for these is the folder name._
 
 
-<!---
+
 ## FAQ:
 
--faq under development
+
+
+How many Images do you use for your Dataset?
+- 10-75 images for my models so far
 
 How long does Dreambooth Training take for you with Shivam's repo?
 - 9k steps was ~2h
@@ -116,6 +119,6 @@ Do training images need to be 512 by 512 pixels?
 
 Have you tried it on img2img and does it generate good results?
 - I haven't tried this one yet with i2i, but the arcane model had good results so I assume this would be even better, since it sticks to the style way better.
--->
+
 
 *Guide by Nitrosocke, edited by wavymulder - last updated Oct 28 2022*
