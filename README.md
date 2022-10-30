@@ -11,7 +11,10 @@ Dataset creation is the most important part of getting good, consistent results 
 
 In my trainings the sample or instance images consist of around 10-100 sample images from the show/movie/syle I want to train. 
 
-Once you've collected photos for a dataset, crop and resize all the images into 512x512 squares and remove any watermarks, logos, people/limbs cut off by the edge of the picture, or anything else you don't want in your final model. For subjects, I've found that including samples with either black or white backgrounds helps immensely. Transparent backgrounds may also work, but can sometimes leave a fringe or border around the subject as can be seen [here](https://github.com/nitrosocke/dreambooth-training-guide/blob/main/00008-51251212345620-tile.jpg). So for now I can't recommend using transparent backgrounds. Make sure to include images with a normal background (for example, of your subject in a scene). In my testing, using only plain backgrounds gave a poorer result.
+Once you've collected photos for a dataset, crop and resize all the images into 512x512 squares and remove any watermarks, logos, people/limbs cut off by the edge of the picture, or anything else you don't want in your final model. For subjects, I've found that including samples with either black or white backgrounds helps immensely. Transparent backgrounds may also work, but can sometimes leave a fringe or border around the subject as can be seen here: 
+![PNG Fringe](https://github.com/nitrosocke/dreambooth-training-guide/blob/main/00008-512512.jpg)
+
+So for now I can't recommend using transparent backgrounds. Make sure to include images with a normal background (for example, of your subject in a scene). In my testing, using only plain backgrounds gave a poorer result.
 
 Save the images in the PNG format and put all of them in a "train" folder.
 
@@ -22,11 +25,14 @@ I don't know where this theory originates, but I find it to be misinformation. I
 Using reg images that weren't created by the model prevents this "prior preservation" from working and instead trains the whole model on your dataset. You can achieve this effect easier by just training without the "prior_preservation_loss".
 
 I usually use 1000 regularization or class images for my style training. The paper suggests 200 times the number of samples, but I've never used more than 2000 reg images. Generate the images beforehand or let the script do it before the training process. I use the stable-diffusion-v1-5 model to render the images using the DDIM Sampler, 30 Steps and 512x512 resolution. For the prompt, you want to use the class you intent to train. When training a style I use "artwork style" as the prompt. You can have a look at my reg images here, or use them for your own training:
+
 [Reg Images by Nitrosocke](https://drive.google.com/drive/folders/19pI70Ilfs0zwz1yYx-Pu8Q9vlOr9975M)
 _The intended class_prompt for these is the folder name._
 
 ## The Settings
-I roughly try to use 100 steps per samples image, so a dataset with 10 images should train good with 1000 steps. The effects of undertraining and overtraining can be seen here: [Training Stages](https://github.com/nitrosocke/dreambooth-training-guide/blob/main/over-under-training-archer.jpg)
+I roughly try to use 100 steps per samples image, so a dataset with 10 images should train good with 1000 steps. The effects of undertraining and overtraining can be seen here: 
+
+![Training Stages](https://github.com/nitrosocke/dreambooth-training-guide/blob/main/over-under-training-archer-01.jpg)
 
 ## FAQ:
 
