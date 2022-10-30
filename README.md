@@ -34,6 +34,20 @@ I roughly try to use 100 steps per samples image, so a dataset with 10 images sh
 
 ![Training Stages](https://github.com/nitrosocke/dreambooth-training-guide/blob/main/over-under-training-archer-01.jpg)
 
+These are examples settings for my training:
+```
+instance_prompt= "archer style"
+class_prompt= "illustration style"
+train_batch_size= 1
+gradient_accumulation_steps= 1
+learning_rate= 1e-6
+lr_scheduler= "constant"
+lr_warmup_steps= 0
+max_train_steps= 4000
+train_text_encoder 
+gradient_checkpointing
+```
+
 ## FAQ:
 
 How many Images do you use for your Dataset?
