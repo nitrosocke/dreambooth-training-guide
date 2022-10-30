@@ -86,4 +86,4 @@ Do training images need to be 512 by 512 pixels?
 
 
 
-*Guide by Nitrosocke, edited by wavymulder - last updated Oct 28 2022*
+*Guide by Nitrosocke, edited by wavymulder - last updated Oct 30 2022*
