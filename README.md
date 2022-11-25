@@ -3,8 +3,24 @@ This is a short guide on the process of collecting a dataset and basic dreamboot
 
 ## My Setup
 - I am using [Dreambooth by ShivamShrirao](https://github.com/ShivamShrirao/diffusers/tree/main/examples/dreambooth)
-- I am running it locally through Miniconda on Win10 with my 3090.
+- I am running it locally through Miniconda on Win10 with a RTX3090
 
+## How to fine tune Stable Diffusion 2.0
+Right now I suggest training on the 512x512 base model of Stable Diffusion 2.0 as the training with a V model has not been tested yet and might need a few modifications to the code. 
+The diffusers based repositories like [Shivams](https://github.com/ShivamShrirao/diffusers/tree/main/examples/dreambooth) will be able to train on the 2.0 model with only a few updates to the dependencies. I recommend using xformers as I have not tested it without them and can't tell if they are actually needed. A windows branch can be found [here](https://gist.github.com/geocine/e51fcc8511c91e4e3b257a0ebee938d0).
+Using the pip installers from the guide you should have the following dependencies installed:
+``` 
+pip install --upgrade git+https://github.com/huggingface/diffusers.git transformers accelerate scipy
+pip install ftfy
+pip install albumentations
+pip install tensorboard
+pip install modelcards
+pip install OmegaConf
+pip install pytorch_lightning
+pip install -U -I --no-deps https://github.com/C43H66N12O12S2/stable-diffusion-webui/releases/download/f/xformers-0.0.14.dev0-cp310-cp310-win_amd64.whl
+```
+Make sure to download the [Stable Diffusion 2.0 Base](https://huggingface.co/stabilityai/stable-diffusion-2-base/tree/main) model and not the 768-v or any other model.
+After you installed the dependencies and loaded the correct model you should be able to train a model just like before.
 
 ## The Dataset
 Dataset creation is the most important part of getting good, consistent results from Dreambooth training. Be sure to use high quality samples, as artifacts such as motion blur or low resolution will get picked up by the training and appear in the images you generate with your model. When training for a specific style, pick samples with good consistency. Ideally, only pick images from the show or artist you're training. Avoid fan art or anything with a different style, unless you're aiming for something like a style fusion.
